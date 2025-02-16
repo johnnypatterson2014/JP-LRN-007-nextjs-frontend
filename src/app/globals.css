@@ -17,24 +17,5 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-.fjalla-one-regular {
-  font-family: "Fjalla One", serif;
-  font-weight: 400;
-  font-size: 28px;
-  font-style: normal;
-}
-
-.text-size-large {
-  font-size: 150%;
-}
-
-.alegreya-sans-regular {
-  font-family: "Alegreya Sans", serif;
-  font-weight: 400;
-  font-size: 21px;
-  font-style: normal;
-}
-
-
