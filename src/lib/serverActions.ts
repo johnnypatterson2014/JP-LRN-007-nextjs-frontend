@@ -1,8 +1,10 @@
 'use server'
 
-export async function testAction() {
-    console.log("This is a server action.")
+export async function testAction(prevState, formData) {
+    const errors = {}
+    const myValue = formData.get('username')
+    console.log(myValue)
     return {
-        success: "true"
+        username: myValue
     }
 }
