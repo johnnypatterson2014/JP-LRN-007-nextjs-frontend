@@ -1,7 +1,6 @@
 import PDFUpload from '@/components/pdf/PDFUpload'
 import PDFList from '@/components/pdf/PDFList'
 import PDFQuery from '@/components/pdf/PDFQuery'
-import { fetchPDFData, handleDeletePdf } from '@/lib/PDFActions';
 
 export default function Page() {
     return (

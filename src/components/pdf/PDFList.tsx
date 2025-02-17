@@ -8,7 +8,7 @@ import { PDFData } from "@/lib/definitions";
 // }
 
 export default async function PDFList() {
-    const pdfs = await fetchPDFData();
+    const pdfs: PDFData[] = await fetchPDFData();
 
     return (
         <div id="main" className="container max-w-screen-md mx-auto m-5 p-2 border border-gray-500 rounded shadow bg-gray-100">
