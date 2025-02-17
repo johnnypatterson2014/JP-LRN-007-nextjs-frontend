@@ -7,8 +7,13 @@ import { PDFData } from "@/lib/definitions";
 //     console.log(id);
 // }
 
-export default async function PDFList() {
-    const pdfs: PDFData[] = await fetchPDFData();
+export default async function PDFList({
+    pdfList,
+}: {
+    pdfList: any;
+}
+) {
+    // const pdfs: PDFData[] = await fetchPDFData();
 
     return (
         <div id="main" className="container max-w-screen-md mx-auto m-5 p-2 border border-gray-500 rounded shadow bg-gray-100">
@@ -37,9 +42,9 @@ export default async function PDFList() {
 
                 List of PDF files
                 <div className="block mt-2 p-0">
-                    {!pdfs.length && <div>Loading...</div>}
+                    {!pdfList.length && <div>Loading...</div>}
 
-                    {pdfs.map((pdf: PDFData) => (
+                    {pdfList.map((pdf: PDFData) => (
                         <div key={pdf.id} className="mt-2 p-0">
                             <input
                                 className="inline w-4/6 h-10 border border-gray-500 rounded mx-2 p-2"
