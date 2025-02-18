@@ -20,12 +20,30 @@ export async function fetchPDFData() {
 }
 
 export async function createPdf(prevState, formData) {
+    console.log("createPdf called.")
     const errors = {}
     const uploadFile = formData.get('upload_file')
+
+    if (!uploadFile || uploadFile.name == "undefined") {
+        errors.uploadFile = "Please select a file.";
+    }
+
     console.log(formData)
     console.log(uploadFile)
+
+    if (errors.uploadFile) {
+        console.log("No file selected.")
+        return {
+            errors: errors,
+            success: false
+        }
+    }
+
+    // TODO: store pdf
+
     return {
-        upload_file: uploadFile
+        upload_file: uploadFile,
+        success: true
     }
 }
 

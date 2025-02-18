@@ -14,8 +14,15 @@ export default function pdfCreate() {
             Upload PDF file
             <form action={myFormAction}>
                 <input name="upload_file" id="upload-file-name" className="w-3/4 border border-gray-500 m-1 p-1 rounded bg-white" type="file" accept=".pdf" />
+
                 <button id="upload-file-button" className="border px-2 border-gray-500 m-0 p-1 bg-gray-300 rounded hover:bg-gray-100" type="submit">Load PDF</button>
             </form>
+            {myFormState.errors?.uploadFile && (
+                <span>{myFormState.errors.uploadFile}</span>
+            )}
+            {myFormState.success && (
+                <span>File uploaded successfully.</span>
+            )}
 
         </div>
 
