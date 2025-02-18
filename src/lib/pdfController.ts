@@ -1,5 +1,6 @@
 'use server'
 import { PDFData } from "@/lib/definitions";
+import { redirect } from "next/navigation";
 
 export async function testAction(prevState, formData) {
     const errors = {}
@@ -26,12 +27,6 @@ export async function createPdf(prevState, formData) {
 
     if (!uploadFile || uploadFile.name == "undefined") {
         errors.uploadFile = "Please select a file.";
-    }
-
-    console.log(formData)
-    console.log(uploadFile)
-
-    if (errors.uploadFile) {
         console.log("No file selected.")
         return {
             errors: errors,
@@ -39,11 +34,49 @@ export async function createPdf(prevState, formData) {
         }
     }
 
-    // TODO: store pdf
+    console.log(formData)
+    console.log(uploadFile)
 
-    return {
-        upload_file: uploadFile,
-        success: true
+    // TODO: store pdf
+    const formDataNew = new FormData();
+    formDataNew.append("file", uploadFile);
+
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/pdfs/upload", {
+        method: "POST",
+        body: formDataNew,
+    });
+
+    if (response.ok) {
+        const newPdf = await response.json();
+        console.log(newPdf);
+        //   setPdfs([...pdfs, newPdf]);
+
+        // return {
+        //     backend_response: newPdf,
+        //     success: true
+        // }
+        return redirect("/tutorial")
+    } else {
+        errors.uploadFileResponse = "Error uploading file.";
+        console.log("Error uploading file.")
+        return {
+            errors: errors,
+            success: false
+        }
+    }
+}
+
+export async function handleDeletePdf(formData) {
+    let pdfId = formData.get("id")
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/pdfs/${pdfId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (res.ok) {
+        //   const copy = pdfs.filter((pdf) => pdf.id !== id);
+        //   setPdfs(copy);
+        return redirect("/tutorial")
     }
 }
 
