@@ -2,9 +2,12 @@
 
 export async function testAction(prevState, formData) {
     const errors = {}
-    const myValue = formData.get('username')
-    console.log(myValue)
+    const uploadFileName = formData.get('upload-file-name')
+    console.log(formData)
+    console.log(uploadFileName)
     return {
-        username: myValue
+        upload_file_name: uploadFileName
     }
+
+
 }
