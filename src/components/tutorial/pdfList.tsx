@@ -10,7 +10,7 @@ export default async function pdfList() {
 
     return (
 
-        <div className="container max-w-screen-md mx-auto m-10 p-5 border border-gray-200 rounded">
+        <div className="container max-w-screen-md mx-auto m-10 p-5 bg-gray-50 border border-gray-400 rounded">
 
             List of PDF files
             <div className="block mt-2 p-0">

@@ -9,7 +9,7 @@ export default function pdfCreate() {
 
     return (
 
-        <div className="container max-w-screen-md mx-auto m-10 p-5 border border-gray-200 rounded">
+        <div className="container max-w-screen-md mx-auto m-10 p-5 bg-gray-50 border border-gray-400 rounded">
 
             Upload PDF file
             <form action={myFormAction}>
