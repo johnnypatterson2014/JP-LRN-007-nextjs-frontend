@@ -85,18 +85,28 @@ function getSelectedPdfs(pdf) {
     return pdf.selected;
 }
 
-export async function handleSearchPdf(value, pdfs) {
-    // console.log(value);
+export async function handleSearchPdf(prevState, formData) {
+
+    const value = formData.get("myquery");
+    const pdfs = formData.get("pdfList")
+    const selectedPdfId = formData.get("selectedPdfId")
+    console.log(value);
+    console.log("selected pdf id: " + selectedPdfId);
+    // console.log(pdfs);
     const body_data = `{ "question": "${value}"}`;
     // const copy = [...pdfs];
-    const selectedFiles = pdfs.filter(getSelectedPdfs);
+    // const selectedFiles = pdfList.filter(getSelectedPdfs);
+    const selectedFileId = selectedPdfId;
     // console.log(selectedFiles);
-    if (selectedFiles.length == 0) {
-        alert("Please select file to ask about.");
-        return;
+    if (selectedPdfId == 'undefined' || selectedPdfId.length == 0) {
+        console.log("No file selected.");
+        return {
+            error: "No file selected",
+            success: false
+        };
     }
     // console.log(selectedFiles[0]);
-    const url = process.env.NEXT_PUBLIC_API_URL + `/pdfs/qa-pdf/${selectedFiles[0].id}`;
+    const url = process.env.NEXT_PUBLIC_API_URL + `/pdfs/qa-pdf/${selectedFileId}`;
     const response = await fetch(url, {
         method: 'POST',
         body: body_data,
@@ -105,9 +115,16 @@ export async function handleSearchPdf(value, pdfs) {
     if (response.ok) {
         const answer = await response.json();
         console.log(answer);
-        const element = document.getElementById('chat-response');
-        element.innerHTML = answer;
+        // const element = document.getElementById('chat-response');
+        // element.innerHTML = answer;
+        return {
+            success: true,
+            response: answer
+        };
     }
-    return;
+    return {
+        error: "unexpected error",
+        success: false
+    };
 }
 

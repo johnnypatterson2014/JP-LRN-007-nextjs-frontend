@@ -1,5 +1,5 @@
 'use client'
-
+import { useState } from "react"
 import { handleDeletePdf } from '@/lib/pdfController';
 
 export default function Pdf(props) {
@@ -8,7 +8,15 @@ export default function Pdf(props) {
         <div key={props.pdf.id} className="mt-2 p-0">
 
 
-            <input id={props.pdf.id} value={props.pdf.id} type="radio" name="selected_file" className="inline" />
+            <input
+                id={props.pdf.id}
+                value={props.pdf.id}
+                type="radio"
+                name="selected_file"
+                onChange={(e) =>
+                    props.setSelectedPdfId(e.target.value)
+                }
+                className="inline" />
 
             <form action={handleDeletePdf} className="inline">
 
