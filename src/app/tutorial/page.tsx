@@ -10,7 +10,7 @@ export default function Page() {
         <>
             <PdfCreate />
             <PdfList />
-            <PdfSearch />
+            {/* <PdfSearch /> */}
         </>
     );
 }

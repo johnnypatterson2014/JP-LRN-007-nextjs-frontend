@@ -80,3 +80,34 @@ export async function handleDeletePdf(formData) {
     }
 }
 
+function getSelectedPdfs(pdf) {
+    // console.log(pdf.selected);
+    return pdf.selected;
+}
+
+export async function handleSearchPdf(value, pdfs) {
+    // console.log(value);
+    const body_data = `{ "question": "${value}"}`;
+    // const copy = [...pdfs];
+    const selectedFiles = pdfs.filter(getSelectedPdfs);
+    // console.log(selectedFiles);
+    if (selectedFiles.length == 0) {
+        alert("Please select file to ask about.");
+        return;
+    }
+    // console.log(selectedFiles[0]);
+    const url = process.env.NEXT_PUBLIC_API_URL + `/pdfs/qa-pdf/${selectedFiles[0].id}`;
+    const response = await fetch(url, {
+        method: 'POST',
+        body: body_data,
+        headers: { 'Content-Type': 'application/json' }
+    });
+    if (response.ok) {
+        const answer = await response.json();
+        console.log(answer);
+        const element = document.getElementById('chat-response');
+        element.innerHTML = answer;
+    }
+    return;
+}
+
